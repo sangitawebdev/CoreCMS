@@ -1,0 +1,10 @@
+# CoreCMS .htaccess
+RewriteEngine On
+RewriteBase /CoreCMS/
+
+# If file or directory exists, serve it
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Otherwise, send to index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
