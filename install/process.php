@@ -58,31 +58,27 @@ $queries = [
         id INT AUTO_INCREMENT PRIMARY KEY,
         option_name VARCHAR(100) UNIQUE,
         option_value TEXT
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ",
 
-    "-- Menus table
-CREATE TABLE menus (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) NOT NULL UNIQUE,
-    type VARCHAR(50) NULL
-);
+    "CREATE TABLE menus (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) NOT NULL UNIQUE,
+        type VARCHAR(50) NULL
+    );",
 
-
--- Menu Items table
-CREATE TABLE menu_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    menu_id INT NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    url VARCHAR(255) DEFAULT NULL,
-    parent_id INT DEFAULT NULL,
-    position INT DEFAULT 0,
-    type ENUM('custom','page','category') DEFAULT 'custom',
-    FOREIGN KEY (menu_id) REFERENCES menus(id) ON DELETE CASCADE,
-    FOREIGN KEY (parent_id) REFERENCES menu_items(id) ON DELETE CASCADE
-);
-
-"
+    "CREATE TABLE menu_items (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        menu_id INT NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        url VARCHAR(255) DEFAULT NULL,
+        parent_id INT DEFAULT NULL,
+        position INT DEFAULT 0,
+        type ENUM('custom','page','category') DEFAULT 'custom',
+        FOREIGN KEY (menu_id) REFERENCES menus(id) ON DELETE CASCADE,
+        FOREIGN KEY (parent_id) REFERENCES menu_items(id) ON DELETE CASCADE
+    );"
 ];
 
 
