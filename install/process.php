@@ -116,6 +116,12 @@ $stmt->execute(['site_name', $site_name]);
 $stmt->execute(['base_url', $base_url]);
 
 // 4. Create config.php file
+$config_dir = __DIR__ . '/../config';
+
+// Create the config directory if it doesn't exist
+if (!is_dir($config_dir)) {
+    mkdir($config_dir, 0755, true); // recursive = true
+}
 $config_content = "<?php
 return [
 'app_name' => '$site_name',   // Dynamic site name
@@ -127,8 +133,10 @@ return [
 'pass' => '$db_pass'
 ]
 ];";
+// Write the config file
+file_put_contents($config_dir . '/config.php', $config_content);
 
-file_put_contents(__DIR__ . '/../config/config.php', $config_content);
+// file_put_contents(__DIR__ . '/../config/config.php', $config_content);
 
 // 5. Redirect to login
 header("Location: $base_url/login");
